@@ -6,12 +6,12 @@ export class Palpite {
     id: number
 
     @Column()
-    nome: string
+    palpite_mandante: number
 
     @Column()
-    email: string
+    palpite_visitante: number
 
     @Column()
-    senha: string
+    pontos: number
 
 }
