@@ -42,4 +42,11 @@ app.get("/listar",async (request, response) => {
   return response.json(["Brasil x Argentina", "Portugal X Espanha"]);
 });
 
+app
+const user = User.create(req.body, (err) =>{if (err) return res.status(400).json({error:true,message: "Error: Usuário não foi cadastrado com sucesso!"});
+
+return res.status(200).json({error: false,message: "Usuário cadastrado com sucesso!"})
+});
+});
+
 app.listen(3333);
