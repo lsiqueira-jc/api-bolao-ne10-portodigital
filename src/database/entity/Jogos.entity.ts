@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToOne, ManyToOne } from "typeorm"
+import {Rodada} from "./rodada.entity"
+import {Selecoes} from "./selecoes.entity"
 
 @Entity()
 export class Jogos {
@@ -9,12 +11,6 @@ export class Jogos {
     situacao_jogo: string
 
     @Column()
-    time_mandante_id: string
-
-    @Column()
-    time_visitante_id: string
-
-    @Column()
     placar_visitante: number
 
     @Column()
@@ -23,8 +19,13 @@ export class Jogos {
     @Column()
     horario_jogo: Date
 
-    @Column()
-    id_rodada: string
+    @OneToOne(() => Selecoes) @JoinColumn()
+    timeMandante: Selecoes
+
+    @OneToOne(() => Selecoes) @JoinColumn()
+    timeVisitante: Selecoes
 
 
+    @ManyToOne(() => Rodada, (rodada) => rodada.jogos)
+    rodada: Rodada
 }

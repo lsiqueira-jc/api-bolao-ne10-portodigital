@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm"
+import {User} from "./user.entity"
+import {Jogos} from "./Jogos.entity"
 
 @Entity()
 export class Palpite {
@@ -14,4 +16,10 @@ export class Palpite {
     @Column()
     pontos: number
 
+    @ManyToOne(() => User, (user) => user.palpite)
+    user: User
+
+    @ManyToOne(() => Jogos, (jogos) => jogos.palpite)
+    jogos: Jogos
+    
 }
