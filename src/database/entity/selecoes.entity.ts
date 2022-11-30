@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm"
+import {Jogos} from "./Jogos.entity"
 
 @Entity()
 export class Selecoes {
@@ -13,5 +14,11 @@ export class Selecoes {
 
     @Column()
     sigla: string
+
+    @ManyToOne(() => Jogos, (jogos) => jogos.selecoes)
+    timeMandante: Jogos
+
+    @ManyToOne(() => Jogos, (jogos) => jogos.selecoes)
+    timeVisitante: Jogos
 
 }
