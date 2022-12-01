@@ -1,6 +1,7 @@
 import * as express from "express"
 import { Request, Response } from "express"
 import { User } from "./database/entity/user.entity"
+import { hash } from "bcrypt"
 
 import { myDataSource } from "../app-data-source"
 
@@ -31,14 +32,18 @@ app.post("/palpitar",(request, response) =>{});
 app.post('/cadastro', async (request,response)=>{
 const data = request.body;
 
+const valorCriptografado = await hash(data.senha, 8);
+
 const usuario = new User();
 usuario.nome = data.nome
 usuario.email = data.email
-usuario.senha = data.senha  // https://github.com/kelektiv/node.bcrypt.js 
+usuario.senha = valorCriptografado  // https://github.com/kelektiv/node.bcrypt.js 
 
 await myDataSource.manager.save(usuario)
 
+
 return response.json(usuario);
+
 
 
 
@@ -72,12 +77,5 @@ app.get('ranking',()=>{});
 
 //   return response.json(["Brasil x Argentina", "Portugal X Espanha"]);
 // });
-
-app
-const user = User.create(req.body, (err) =>{if (err) return res.status(400).json({error:true,message: "Error: Usuário não foi cadastrado com sucesso!"});
-
-return res.status(200).json({error: false,message: "Usuário cadastrado com sucesso!"})
-});
-});
 
 app.listen(3333);
