@@ -9,5 +9,5 @@ export const myDataSource = new DataSource({
     database: "mvp",
     entities: ["./src/database/entity/*.ts"],
     logging: true,
-    synchronize: true
+    synchronize: false
 })

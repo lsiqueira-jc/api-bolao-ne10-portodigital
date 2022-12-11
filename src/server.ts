@@ -2,6 +2,7 @@ import * as express from "express"
 import { Request, Response } from "express"
 import { User } from "./database/entity/user.entity"
 import { hash } from "bcrypt"
+import { Palpite } from "./database/entity/palpite.entity"
 
 import { myDataSource } from "../app-data-source"
 
@@ -26,10 +27,31 @@ app.get("/",(request,response)=> {
 });
 
 //Palpite Ricardo e Sandra 
-app.post("/palpitar",(request, response) =>{});
+//app.post("/palpitar",(request, response) =>{});
+
+app.post('/palpitar', async (request, response) => {
+const palpitar = request.body;
+
+const palpite = new Palpite();
+
+palpite.palpite_mandante = palpitar.palpite_mandante
+palpite.palpite_visitante = palpitar.palpite_visitante
+palpite.pontos	= palpitar.pontos
+palpite.user = palpitar.user
+palpite.jogos = palpitar.jogos
+
+await myDataSource.manager.save(palpite)
+
+return response.json(palpite);
+
+});
+
+
+
+
 
 //cadastro de usuario - Thiago e Eduardo 
-app.post('/cadastro', async (request,response)=>{
+app.post('/cadastro', async (request, response)=>{
 const data = request.body;
 
 const valorCriptografado = await hash(data.senha, 8);

@@ -12,7 +12,7 @@
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
     "typeor": "^1.2.0",
-    "typeorm": "^0.3.10"
+    "typeorm": "^0.3.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.20",
